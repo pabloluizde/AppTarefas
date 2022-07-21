@@ -19,7 +19,7 @@ class _InitialScreenState extends State<InitialScreen> {
             child: Text("Tarefas")),
       ),
       body: AnimatedOpacity(
-        duration: Duration(milliseconds: 500),
+        duration: Duration(milliseconds: 400),
         opacity: opacidade ? 1 : 0,
         child: ListView(
           children: [
@@ -51,6 +51,8 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        child:
+            Icon(opacidade ? Icons.visibility : Icons.visibility_off_outlined),
         onPressed: () {
           setState(() {
             opacidade = !opacidade;

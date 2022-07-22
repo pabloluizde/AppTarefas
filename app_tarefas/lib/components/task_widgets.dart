@@ -1,4 +1,5 @@
-import 'package:app_tarefas/difficulty.dart';
+import 'package:app_tarefas/components/difficulty.dart';
+import 'package:app_tarefas/components/difficulty.dart';
 import 'package:flutter/material.dart';
 
 class Task extends StatefulWidget {

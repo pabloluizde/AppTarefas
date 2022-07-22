@@ -1,4 +1,4 @@
-import 'package:app_tarefas/task_widgets.dart';
+import 'package:app_tarefas/components/task_widgets.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatefulWidget {

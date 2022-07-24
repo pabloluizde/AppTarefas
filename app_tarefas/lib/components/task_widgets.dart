@@ -26,31 +26,42 @@ class _TaskState extends State<Task> {
             Container(
               height: 140,
               decoration: BoxDecoration(
-                  color: Colors.blue, borderRadius: BorderRadius.circular(5.0)),
+                  color: Color.fromARGB(255, 216, 216, 216),
+                  borderRadius: BorderRadius.circular(5.0)),
             ),
             Column(
               children: [
                 Container(
                   decoration: BoxDecoration(
+                      image: DecorationImage(
+                          opacity: nivel > 0
+                              ? (widget.dificuldade > 0)
+                                  ? (nivel / widget.dificuldade) / 10
+                                  : 0.1
+                              : 0.1,
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                            widget.foto,
+                          )),
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5.0)),
                   height: 100,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(5.0)),
-                        width: 72,
-                        height: 100,
-                        child: ClipRRect(
-                          child: Image.network(
-                            widget.foto,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
+                      // Container(
+                      //   decoration: BoxDecoration(
+                      //       color: Colors.grey,
+                      //       borderRadius: BorderRadius.circular(5.0)),
+                      //   width: 90,
+                      //   height: 100,
+                      //   child: ClipRRect(
+                      //     child: Image.network(
+                      //       widget.foto,
+                      //       fit: BoxFit.cover,
+                      //     ),
+                      //   ),
+                      // ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,10 +83,21 @@ class _TaskState extends State<Task> {
                       Container(
                         height: 52,
                         width: 52,
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(5.0)),
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                            color: Colors.purpleAccent,
+                            blurRadius: 7.0,
+                            spreadRadius: 1.0,
+                            offset: Offset(
+                              0.0,
+                              0.0,
+                            ),
+                          ),
+                        ], borderRadius: BorderRadius.circular(5.0)),
                         child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.purpleAccent,
+                            ),
                             onPressed: () {
                               setState(() {
                                 nivel++;
@@ -104,6 +126,9 @@ class _TaskState extends State<Task> {
                       child: Container(
                           width: 200,
                           child: LinearProgressIndicator(
+                            backgroundColor: Colors.purple[100],
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.purpleAccent),
                             value: (widget.dificuldade > 0)
                                 ? (nivel / widget.dificuldade) / 10
                                 : 1,

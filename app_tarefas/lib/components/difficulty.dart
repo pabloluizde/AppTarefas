@@ -20,27 +20,37 @@ class _DificultyState extends State<Dificulty> {
         Icon(
           Icons.star,
           size: 15,
-          color: (widget.dificultyLevel >= 1) ? Colors.blue : Colors.blue[100],
+          color: (widget.dificultyLevel >= 1)
+              ? Colors.purpleAccent
+              : Colors.blue[100],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (widget.dificultyLevel >= 2) ? Colors.blue : Colors.blue[100],
+          color: (widget.dificultyLevel >= 2)
+              ? Colors.purpleAccent
+              : Colors.blue[100],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (widget.dificultyLevel >= 3) ? Colors.blue : Colors.blue[100],
+          color: (widget.dificultyLevel >= 3)
+              ? Colors.purpleAccent
+              : Colors.blue[100],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (widget.dificultyLevel >= 4) ? Colors.blue : Colors.blue[100],
+          color: (widget.dificultyLevel >= 4)
+              ? Colors.purpleAccent
+              : Colors.blue[100],
         ),
         Icon(
           Icons.star,
           size: 15,
-          color: (widget.dificultyLevel >= 5) ? Colors.blue : Colors.blue[100],
+          color: (widget.dificultyLevel >= 5)
+              ? Colors.purpleAccent
+              : Colors.blue[100],
         ),
       ],
     );

@@ -14,9 +14,15 @@ class _InitialScreenState extends State<InitialScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        shadowColor: Colors.white,
+        backgroundColor: Colors.white,
         title: Container(
             alignment: AlignmentDirectional.centerStart,
-            child: Text("Tarefas")),
+            child: Text(
+              "Tarefas",
+              style: TextStyle(color: Colors.black),
+            )),
       ),
       body: AnimatedOpacity(
         duration: Duration(milliseconds: 400),

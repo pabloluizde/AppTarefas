@@ -1,4 +1,3 @@
-import 'package:app_tarefas/components/task_widgets.dart';
 import 'package:app_tarefas/data/task_inherited.dart';
 import 'package:app_tarefas/screens/form_screen.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +57,11 @@ class _InitialScreenState extends State<InitialScreen> {
         child: Icon(Icons.add),
         onPressed: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => FormScreen()));
+              context,
+              MaterialPageRoute(
+                  builder: (contextNew) => FormScreen(
+                        taskBuild: context,
+                      )));
         },
       ),
     );

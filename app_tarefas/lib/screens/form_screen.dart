@@ -1,9 +1,12 @@
+import 'package:app_tarefas/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
 import '../services/validator.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({Key? key}) : super(key: key);
+  const FormScreen({Key? key, required this.taskBuild}) : super(key: key);
+
+  final BuildContext taskBuild;
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -181,12 +184,15 @@ class _FormScreenState extends State<FormScreen> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            print(nameController.text);
-                            print(imageController.text);
+                            TaskInherited.of(widget.taskBuild).newTask(
+                                nameController.text,
+                                imageController.text,
+                                int.parse(dificuldadeController.text));
+
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Tarefa salva")));
 
-                            Navigator.pop(context);
+
                           }
                           Validator.casesIf(context, nameController.text,
                               dificuldadeController.text, imageController.text);

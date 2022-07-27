@@ -49,19 +49,6 @@ class _TaskState extends State<Task> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //       color: Colors.grey,
-                      //       borderRadius: BorderRadius.circular(5.0)),
-                      //   width: 90,
-                      //   height: 100,
-                      //   child: ClipRRect(
-                      //     child: Image.network(
-                      //       widget.foto,
-                      //       fit: BoxFit.cover,
-                      //     ),
-                      //   ),
-                      // ),
                       Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,

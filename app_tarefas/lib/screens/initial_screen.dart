@@ -1,4 +1,6 @@
 import 'package:app_tarefas/components/task_widgets.dart';
+import 'package:app_tarefas/data/task_inherited.dart';
+import 'package:app_tarefas/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -17,52 +19,46 @@ class _InitialScreenState extends State<InitialScreen> {
         elevation: 0,
         shadowColor: Colors.white,
         backgroundColor: Colors.white,
-        title: Container(
-            alignment: AlignmentDirectional.centerStart,
-            child: Text(
-              "Tarefas",
-              style: TextStyle(color: Colors.black),
-            )),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+                alignment: AlignmentDirectional.centerStart,
+                child: Text(
+                  "Tarefas",
+                  style: TextStyle(color: Colors.black),
+                )),
+            Container(
+                alignment: AlignmentDirectional.centerStart,
+                child: IconButton(
+                  icon: Icon(
+                      opacidade
+                          ? Icons.visibility
+                          : Icons.visibility_off_outlined,
+                      color:
+                          opacidade ? Colors.purpleAccent : Colors.purple[100]),
+                  onPressed: () {
+                    setState(() {
+                      opacidade = !opacidade;
+                    });
+                  },
+                )),
+          ],
+        ),
       ),
       body: AnimatedOpacity(
         duration: Duration(milliseconds: 400),
         opacity: opacidade ? 1 : 0,
         child: ListView(
-          children: [
-            Task(
-                "Aprender Flutter",
-                "https://pbs.twimg.com/media/Eu7m692XIAEvxxP?format=png&name=large",
-                3),
-            Task(
-                "Fazer Exercicios",
-                "https://tswbike.com/wp-content/uploads/2020/09/108034687_626160478000800_2490880540739582681_n-e1600200953343.jpg",
-                2),
-            Task(
-                "Descanso",
-                "https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg",
-                4),
-            Task(
-                "Descanso",
-                "https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg",
-                4),
-            Task(
-                "Descanso",
-                "https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg",
-                4),
-            Task(
-                "Descanso",
-                "https://thebogotapost.com/wp-content/uploads/2017/06/636052464065850579-137719760_flyer-image-1.jpg",
-                4),
-          ],
+          children: TaskInherited.of(context).taskList,
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child:
-            Icon(opacidade ? Icons.visibility : Icons.visibility_off_outlined),
+        backgroundColor: Colors.purpleAccent,
+        child: Icon(Icons.add),
         onPressed: () {
-          setState(() {
-            opacidade = !opacidade;
-          });
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => FormScreen()));
         },
       ),
     );

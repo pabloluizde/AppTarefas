@@ -16,6 +16,7 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController dificuldadeController = TextEditingController();
   TextEditingController imageController = TextEditingController();
+  TextEditingController descController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -145,6 +146,35 @@ class _FormScreenState extends State<FormScreen> {
                     ),
                   ),
                   Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: descController,
+                      decoration: InputDecoration(
+                        hintText: "Descricao",
+                        labelText: "desc",
+                        labelStyle: const TextStyle(color: Colors.grey),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                          borderSide: const BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.all(15.0),
                     child: Container(
                       height: 200,
@@ -187,12 +217,12 @@ class _FormScreenState extends State<FormScreen> {
                             TaskInherited.of(widget.taskBuild).newTask(
                                 nameController.text,
                                 imageController.text,
-                                int.parse(dificuldadeController.text));
+                                int.parse(dificuldadeController.text),
+                                descController.text);
 
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Tarefa salva")));
-
-
+                            Navigator.pop(context);
                           }
                           Validator.casesIf(context, nameController.text,
                               dificuldadeController.text, imageController.text);

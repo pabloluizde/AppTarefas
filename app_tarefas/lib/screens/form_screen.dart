@@ -1,12 +1,14 @@
-import 'package:app_tarefas/data/task_inherited.dart';
+import 'package:app_tarefas/components/task.dart';
+import 'package:app_tarefas/models/task_model.dart';
 import 'package:flutter/material.dart';
 
+import '../data/dao/task_dao.dart';
 import '../services/validator.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({Key? key, required this.taskBuild}) : super(key: key);
-
-  final BuildContext taskBuild;
+  const FormScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -18,6 +20,7 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController imageController = TextEditingController();
   TextEditingController descController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  final TasksDao _dao = TasksDao();
 
   @override
   Widget build(BuildContext context) {
@@ -214,15 +217,21 @@ class _FormScreenState extends State<FormScreen> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            TaskInherited.of(widget.taskBuild).newTask(
-                                nameController.text,
-                                imageController.text,
-                                int.parse(dificuldadeController.text),
-                                descController.text);
-
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("Tarefa salva")));
                             Navigator.pop(context);
+
+                            final String nome = nameController.text;
+                            final String foto = imageController.text;
+                            final String desc = descController.text;
+                            final int dificuldade =
+                                int.parse(dificuldadeController.text);
+
+                            final TaskViewModel newContact =
+                                TaskViewModel(0, nome, dificuldade, foto, desc);
+                            _dao
+                                .save(newContact)
+                                .then((id) => Navigator.of(context).maybePop());
                           }
                           Validator.casesIf(context, nameController.text,
                               dificuldadeController.text, imageController.text);

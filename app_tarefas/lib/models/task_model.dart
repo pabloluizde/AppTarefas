@@ -1,5 +1,5 @@
 class TaskViewModel {
-  final int? id;
+  final int id;
   final String nome;
   final int dificuldade;
   final String foto;

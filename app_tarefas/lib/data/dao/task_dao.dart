@@ -23,6 +23,17 @@ class TasksDao {
     return db.insert('tasks', taskMap);
   }
 
+  Future<int> delete(int id) async {
+    final Database db = await getDatabase();
+    return await db.delete('tasks', where: '"$_id" = ?', whereArgs: [id]);
+  }
+
+  Future<int> update(TaskViewModel todo) async {
+    final Database db = await getDatabase();
+    return await db.update('tasks', _toMap(todo),
+        where: '$_id = ?', whereArgs: [todo.nome]);
+  }
+
   Map<String, dynamic> _toMap(TaskViewModel task) {
     final Map<String, dynamic> taskMap = {};
     taskMap[_nome] = task.nome;

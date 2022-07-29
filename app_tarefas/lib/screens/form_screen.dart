@@ -216,23 +216,14 @@ class _FormScreenState extends State<FormScreen> {
                           primary: Colors.purpleAccent,
                         ),
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(content: Text("Tarefa salva")));
-                            Navigator.pop(context);
-
-                            final String nome = nameController.text;
-                            final String foto = imageController.text;
-                            final String desc = descController.text;
-                            final int dificuldade =
-                                int.parse(dificuldadeController.text);
-
-                            final TaskViewModel newContact =
-                                TaskViewModel(0, nome, dificuldade, foto, desc);
-                            _dao
-                                .save(newContact)
-                                .then((id) => Navigator.of(context).maybePop());
-                          }
+                          Validator.saveValidator(
+                              context,
+                              _formKey,
+                              nameController.text,
+                              dificuldadeController.text,
+                              imageController.text,
+                              descController.text,
+                              _dao);
                           Validator.casesIf(context, nameController.text,
                               dificuldadeController.text, imageController.text);
                         },

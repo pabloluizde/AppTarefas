@@ -30,8 +30,8 @@ class TasksDao {
 
   Future<int> update(TaskViewModel todo) async {
     final Database db = await getDatabase();
-    return await db.update('tasks', _toMap(todo),
-        where: '$_id = ?', whereArgs: [todo.nome]);
+    return await db
+        .update('tasks', _toMap(todo), where: '$_id = ?', whereArgs: [todo.id]);
   }
 
   Map<String, dynamic> _toMap(TaskViewModel task) {

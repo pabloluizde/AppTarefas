@@ -31,9 +31,13 @@ class _TasksListState extends State<TasksList> {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onLongPress: () async {
-          List<int> contact = [widget.id];
+          int contact = [widget.id].length;
+          final TaskViewModel newContact = TaskViewModel(
+              0, widget.nome, widget.dificuldade, widget.foto, widget.desc);
 
-          _dao.delete(contact.length).then((value) => setState(() {}));
+          _dao.delete(contact.toInt()).then((value) => setState(() {
+                _dao.update(newContact);
+              }));
         },
         onTap: () {
           setState(() {

@@ -25,7 +25,7 @@ class TasksDao {
 
   Future<int> delete(int id) async {
     final Database db = await getDatabase();
-    return await db.delete('tasks', where: '"$_id" = ?', whereArgs: [id]);
+    return await db.delete('tasks', where: '$_id = ?', whereArgs: [id]);
   }
 
   Future<int> update(TaskViewModel todo) async {

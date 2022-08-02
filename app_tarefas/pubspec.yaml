@@ -31,6 +31,7 @@ dependencies:
     sdk: flutter
   sqflite:  
   avatar_glow:
+  image_picker:
   path:
 
 

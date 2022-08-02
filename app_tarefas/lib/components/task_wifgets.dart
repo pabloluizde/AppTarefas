@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_tarefas/components/difficulty.dart';
 import 'package:app_tarefas/components/task_field_desc.dart';
 import 'package:flutter/material.dart';
@@ -74,14 +76,15 @@ class _TasksListState extends State<TasksList> {
             ),
             Column(
               children: [
+                // Container(
+                //   child: Image.file(File(widget.foto)),
+                // ),
                 Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           opacity: 0.4,
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                            widget.foto,
-                          )),
+                          image: FileImage(File(widget.foto))),
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5.0)),
                   height: 100,

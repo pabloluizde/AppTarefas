@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_tarefas/models/task_model.dart';
 import 'package:flutter/material.dart';
 
@@ -31,12 +33,12 @@ class Validator {
       Navigator.pop(context);
 
       final String nome = nameController;
-      final String foto = imageController;
+      final File foto = imageController;
       final String desc = descController;
       final int dificuldade = int.parse(dificuldadeController);
 
       final TaskViewModel newContact =
-          TaskViewModel(0, nome, dificuldade, foto, desc);
+          TaskViewModel(0, nome, dificuldade, foto.path, desc);
       _dao.save(newContact).then((id) => Navigator.of(context).maybePop());
     }
   }
@@ -73,12 +75,12 @@ class Validator {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Preencha o campos em vermelho")));
     }
-    if (nameController.isEmpty &&
-        dificuldadeController.isNotEmpty &&
-        imageController.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text("Preencha o campos em vermelho")));
-    }
+    // if (nameController.isEmpty &&
+    //     dificuldadeController.isNotEmpty &&
+    //     imageController.isEmpty) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //       SnackBar(content: Text("Preencha o campos em vermelho")));
+    // }
     if (nameController.isEmpty &&
         dificuldadeController.isEmpty &&
         imageController.isNotEmpty) {

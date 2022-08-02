@@ -5,7 +5,7 @@ import '../data/dao/task_dao.dart';
 import '../models/task_model.dart';
 
 class InitialScreen extends StatefulWidget {
-  const InitialScreen({Key? key}) : super(key: key);
+  InitialScreen({Key? key}) : super(key: key);
 
   @override
   State<InitialScreen> createState() => _InitialScreenState();
@@ -14,7 +14,6 @@ class InitialScreen extends StatefulWidget {
 class _InitialScreenState extends State<InitialScreen> {
   bool opacidade = true;
   final TasksDao _dao = TasksDao();
-
   List<TaskViewModel> contacts = [];
 
   @override
@@ -52,45 +51,45 @@ class _InitialScreenState extends State<InitialScreen> {
         ),
       ),
       body: AnimatedOpacity(
-          duration: Duration(milliseconds: 400),
-          opacity: opacidade ? 1 : 0,
-          child: FutureBuilder<List<TaskViewModel>>(
-            future: _dao.findAll(),
-            initialData: [],
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.done:
-                  final List<TaskViewModel>? contacts = snapshot.data;
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      final TaskViewModel contact = contacts![index];
-                      return TasksList(contact.nome, contact.foto,
-                          contact.dificuldade, contact.desc, contact.id);
-                    },
-                    itemCount: contacts?.length,
-                  );
+        duration: Duration(milliseconds: 400),
+        opacity: opacidade ? 1 : 0.0,
+        child: FutureBuilder<List<TaskViewModel>>(
+          future: _dao.findAll(),
+          initialData: contacts,
+          builder: (context, AsyncSnapshot<List<TaskViewModel>> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.done:
+                final List<TaskViewModel>? contacts = snapshot.data;
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    final TaskViewModel contact = contacts![index];
 
-                case ConnectionState.waiting:
-                  return Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        CircularProgressIndicator(),
-                        Text('Loading')
-                      ],
-                    ),
-                  );
-                case ConnectionState.none:
-                  // TODO: Handle this case.
-                  break;
-                case ConnectionState.active:
-                  // TODO: Handle this case.
-                  break;
-              }
-              return Text("data");
-            },
-          )),
+                    return TasksList(contact.nome, contact.foto,
+                        contact.dificuldade, contact.desc, contact.id);
+                  },
+                  itemCount: contacts?.length,
+                );
+
+              case ConnectionState.waiting:
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: const [
+                      CircularProgressIndicator(),
+                      Text('Loading')
+                    ],
+                  ),
+                );
+              case ConnectionState.none:
+                break;
+              case ConnectionState.active:
+                break;
+            }
+            return Text("data");
+          },
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.purpleAccent,
         child: Icon(Icons.add),

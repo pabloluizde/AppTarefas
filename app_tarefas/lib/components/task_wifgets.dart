@@ -1,9 +1,7 @@
 import 'package:app_tarefas/components/difficulty.dart';
 import 'package:app_tarefas/components/task_field_desc.dart';
 import 'package:flutter/material.dart';
-
 import '../data/dao/task_dao.dart';
-import '../models/task_model.dart';
 
 class TasksList extends StatefulWidget {
   final String nome;
@@ -12,7 +10,7 @@ class TasksList extends StatefulWidget {
   final int dificuldade;
   final int id;
 
-  const TasksList(this.nome, this.foto, this.dificuldade, this.desc, this.id,
+  TasksList(this.nome, this.foto, this.dificuldade, this.desc, this.id,
       {Key? key})
       : super(key: key);
 
@@ -30,9 +28,30 @@ class _TasksListState extends State<TasksList> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        onLongPress: () async {
+        onLongPress: () {
           setState(() {
-            _dao.delete(widget.id);
+            showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text("Concluiu??"),
+                content: const Text("Já está concluido?"),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      setState(() {
+                        Navigator.of(context).pop();
+                        _dao.delete(widget.id);
+                      });
+                    },
+                    child: Container(
+                      color: Colors.purpleAccent,
+                      padding: const EdgeInsets.all(14),
+                      child: const Text("Conclui"),
+                    ),
+                  ),
+                ],
+              ),
+            );
           });
         },
         onTap: () {
@@ -58,11 +77,7 @@ class _TasksListState extends State<TasksList> {
                 Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
-                          opacity: nivel > 0
-                              ? (widget.dificuldade > 0)
-                                  ? (nivel / widget.dificuldade) / 10
-                                  : 0.1
-                              : 0.1,
+                          opacity: 0.4,
                           fit: BoxFit.cover,
                           image: NetworkImage(
                             widget.foto,
@@ -84,12 +99,16 @@ class _TasksListState extends State<TasksList> {
                               child: Text(
                                 widget.nome,
                                 style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
                                     fontSize: 24,
                                     overflow: TextOverflow.ellipsis),
                               ),
                             ),
-                            Dificulty(
-                              dificultyLevel: widget.dificuldade,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 5.0),
+                              child: Dificulty(
+                                dificultyLevel: widget.dificuldade,
+                              ),
                             )
                           ],
                         ),
@@ -155,8 +174,8 @@ class _TasksListState extends State<TasksList> {
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: Text(
-                            "Nivel: $nivel",
-                            style: const TextStyle(color: Colors.white),
+                            "Concluído: $nivel%",
+                            style: const TextStyle(color: Colors.black),
                           ),
                         ),
                       ],

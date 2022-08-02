@@ -30,6 +30,7 @@ dependencies:
   flutter:
     sdk: flutter
   sqflite:  
+  avatar_glow:
   path:
 
 

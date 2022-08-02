@@ -1,4 +1,5 @@
 import 'package:app_tarefas/screens/initial_screen.dart';
+import 'package:app_tarefas/screens/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -21,6 +22,6 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: InitialScreen());
+        home: SplashPage());
   }
 }

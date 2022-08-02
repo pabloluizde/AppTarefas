@@ -1,7 +1,7 @@
 import 'package:app_tarefas/components/task_wifgets.dart';
 import 'package:flutter/material.dart';
 
-class FieldDesc extends StatelessWidget {
+class FieldDesc extends StatefulWidget {
   const FieldDesc({
     Key? key,
     required this.widget,
@@ -9,6 +9,11 @@ class FieldDesc extends StatelessWidget {
 
   final TasksList widget;
 
+  @override
+  State<FieldDesc> createState() => _FieldDescState();
+}
+
+class _FieldDescState extends State<FieldDesc> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,9 +29,16 @@ class FieldDesc extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: ListView(
                   children: [
+                    const Text(
+                      "Descrição: ",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
                     Text(
-                      widget.desc,
-                      style: const TextStyle(color: Colors.black, fontSize: 20),
+                      widget.widget.desc,
+                      style: const TextStyle(color: Colors.black, fontSize: 18),
                     ),
                   ],
                 ),

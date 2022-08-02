@@ -1,5 +1,3 @@
-import 'package:app_tarefas/components/task.dart';
-import 'package:app_tarefas/models/task_model.dart';
 import 'package:flutter/material.dart';
 
 import '../data/dao/task_dao.dart';
@@ -150,11 +148,13 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: TextFormField(
+                    child: TextField(
+                      keyboardType: TextInputType.multiline,
                       controller: descController,
+                      maxLines: 6,
                       decoration: InputDecoration(
-                        hintText: "Descricao",
-                        labelText: "desc",
+                        hintText: "Descrição",
+                        labelText: "Descrição",
                         labelStyle: const TextStyle(color: Colors.grey),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(15.0),

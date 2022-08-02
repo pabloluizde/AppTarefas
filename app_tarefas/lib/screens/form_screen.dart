@@ -128,41 +128,6 @@ class _FormScreenState extends State<FormScreen> {
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child: TextFormField(
-                  //     validator: (value) {
-                  //       return Validator.validatorUrl(value);
-                  //     },
-                  //     controller: imageController,
-                  //     onChanged: (text) {
-                  //       setState(() {});
-                  //     },
-                  //     decoration: InputDecoration(
-                  //       hintText: "Nova Imagem",
-                  //       labelText: "Imagem",
-                  //       labelStyle: const TextStyle(color: Colors.grey),
-                  //       focusedBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(15.0),
-                  //         borderSide: const BorderSide(
-                  //           color: Colors.grey,
-                  //         ),
-                  //       ),
-                  //       enabledBorder: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(15.0),
-                  //         borderSide: const BorderSide(
-                  //           color: Colors.grey,
-                  //         ),
-                  //       ),
-                  //       border: OutlineInputBorder(
-                  //         borderRadius: BorderRadius.circular(15.0),
-                  //         borderSide: const BorderSide(
-                  //           color: Colors.grey,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
@@ -207,16 +172,6 @@ class _FormScreenState extends State<FormScreen> {
                             color: Colors.grey,
                             borderRadius: BorderRadius.circular(10)),
                         child: image != null ? Image.file(image!) : null,
-                        // child: ClipRRect(
-                        //   borderRadius: BorderRadius.circular(10),
-                        //   child: Image.network(imageController.text, errorBuilder:
-                        //       (BuildContext context, Object exception,
-                        //           StackTrace? stackTrace) {
-                        //     return Container(
-                        //       child: Icon(Icons.camera_alt_outlined),
-                        //     );
-                        //   }, fit: BoxFit.cover),
-                        // ),
                       ),
                     ),
                   ),
@@ -248,7 +203,7 @@ class _FormScreenState extends State<FormScreen> {
                               descController.text,
                               _dao);
                           Validator.casesIf(context, nameController.text,
-                              dificuldadeController.text, imageController.text);
+                              dificuldadeController.text, image);
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,

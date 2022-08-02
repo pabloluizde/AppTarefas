@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:app_tarefas/components/difficulty.dart';
 import 'package:app_tarefas/components/task_field_desc.dart';
+import 'package:app_tarefas/services/validator.dart';
 import 'package:flutter/material.dart';
 import '../data/dao/task_dao.dart';
 
@@ -27,6 +27,7 @@ class _TasksListState extends State<TasksList> {
 
   @override
   Widget build(BuildContext context) {
+    File pic = File(widget.foto);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
@@ -76,15 +77,12 @@ class _TasksListState extends State<TasksList> {
             ),
             Column(
               children: [
-                // Container(
-                //   child: Image.file(File(widget.foto)),
-                // ),
                 Container(
                   decoration: BoxDecoration(
                       image: DecorationImage(
                           opacity: 0.4,
                           fit: BoxFit.cover,
-                          image: FileImage(File(widget.foto))),
+                          image: Validator.imagePathValid(pic)),
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(5.0)),
                   height: 100,

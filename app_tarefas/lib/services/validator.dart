@@ -25,9 +25,16 @@ class Validator {
     return null;
   }
 
+  static imagePathValid(File pic) {
+    return pic.existsSync()
+        ? FileImage(File(pic.path))
+        : NetworkImage(
+            "https://i.pinimg.com/564x/a1/1a/43/a11a43010541818bbcf77a41e830d575.jpg");
+  }
+
   static saveValidator(BuildContext context, _formKey, nameController,
       dificuldadeController, imageController, descController, _dao) {
-    if (_formKey.currentState!.validate()) {
+    if (_formKey.currentState!.validate() && imageController != null) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Tarefa salva")));
       Navigator.pop(context);
@@ -47,7 +54,7 @@ class Validator {
       imageController) {
     if (nameController.isEmpty &&
         dificuldadeController.isEmpty &&
-        imageController.isEmpty) {
+        imageController == null) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Preencha os campos")));
     }
@@ -65,25 +72,25 @@ class Validator {
     }
     if (nameController.isNotEmpty &&
         dificuldadeController.isNotEmpty &&
-        imageController.isEmpty) {
+        imageController == null) {
       ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Preencha o campo Image")));
+          .showSnackBar(SnackBar(content: Text("Selecione uma Image")));
     }
     if (nameController.isNotEmpty &&
         dificuldadeController.isEmpty &&
-        imageController.isEmpty) {
+        imageController == null) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Preencha o campos em vermelho")));
     }
-    // if (nameController.isEmpty &&
-    //     dificuldadeController.isNotEmpty &&
-    //     imageController.isEmpty) {
-    //   ScaffoldMessenger.of(context).showSnackBar(
-    //       SnackBar(content: Text("Preencha o campos em vermelho")));
-    // }
+    if (nameController.isEmpty &&
+        dificuldadeController.isNotEmpty &&
+        imageController == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Preencha o campos em vermelho")));
+    }
     if (nameController.isEmpty &&
         dificuldadeController.isEmpty &&
-        imageController.isNotEmpty) {
+        imageController != null) {
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text("Preencha o campos em vermelho")));
     }
